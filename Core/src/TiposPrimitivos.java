@@ -33,7 +33,7 @@ public class TiposPrimitivos {
         c = 3;
         d = 3;
 
-        System.out.println("valor da variavel Int: " + Int);
+        System.out.println("valor da variavel Int: " + 2548);
         Int = 10;
         System.out.println("valor da variavel Int depois de reatribuir um valor " + Int);
 
