@@ -69,6 +69,7 @@ public class TiposPrimitivos {
         // byte Byte
         System.out.println("Hoje é : " +  numero_String);
         System.out.println("Hoje é : " +  castNumero);
+        System.out.println("Hoje é : " +  castNumero);
 
     }
 }
