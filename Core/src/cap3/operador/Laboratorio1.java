@@ -1,4 +1,4 @@
-package operador;
+package cap3.operador;
 
 public class Laboratorio1 {
 

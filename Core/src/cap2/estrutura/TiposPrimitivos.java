@@ -1,3 +1,5 @@
+package cap2.estrutura;
+
 public class TiposPrimitivos {
 
     public static void main(String[] args) {

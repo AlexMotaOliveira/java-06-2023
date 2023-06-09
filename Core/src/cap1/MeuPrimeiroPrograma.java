@@ -1,3 +1,5 @@
+package cap1;
+
 /**
  * @author Alex Mota
  */

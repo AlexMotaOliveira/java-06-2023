@@ -1,4 +1,4 @@
-package cap1.estrutura;
+package cap4;
 
 public class While {
 
