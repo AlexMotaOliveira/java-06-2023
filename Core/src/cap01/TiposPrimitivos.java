@@ -1,4 +1,4 @@
-import java.util.stream.Stream;
+package cap01;
 
 public class TiposPrimitivos {
 
