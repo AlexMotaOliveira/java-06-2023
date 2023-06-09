@@ -1,4 +1,4 @@
-package estrutura;
+package cap1.estrutura;
 
 public class If {
 
