@@ -1,5 +1,3 @@
-import java.util.stream.Stream;
-
 public class TiposPrimitivos {
 
     public static void main(String[] args) {
@@ -57,7 +55,7 @@ public class TiposPrimitivos {
 
         System.out.println("cast explicito: " + texto);
 
-        System.out.println("Hoje é : " +  DiaDaSemana.SEGUNDA_FEIRA);
+        System.out.println("Hoje é : " +  DiaDaSemana.SEGUNDA);
 
         String numero_String = "27";
 
