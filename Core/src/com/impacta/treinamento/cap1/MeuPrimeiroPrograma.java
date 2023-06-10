@@ -1,4 +1,4 @@
-package cap1;
+package com.impacta.treinamento.cap1;
 
 /**
  * @author Alex Mota

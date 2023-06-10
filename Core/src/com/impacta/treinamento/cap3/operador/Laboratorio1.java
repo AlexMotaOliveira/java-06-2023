@@ -1,4 +1,4 @@
-package cap3.operador;
+package com.impacta.treinamento.cap3.operador;
 
 public class Laboratorio1 {
 

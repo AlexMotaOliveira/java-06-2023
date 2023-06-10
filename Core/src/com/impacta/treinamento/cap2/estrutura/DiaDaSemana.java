@@ -1,4 +1,4 @@
-package cap2.estrutura;
+package com.impacta.treinamento.cap2.estrutura;
 
 public enum DiaDaSemana {
 

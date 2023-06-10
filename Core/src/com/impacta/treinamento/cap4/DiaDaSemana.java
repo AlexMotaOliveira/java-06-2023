@@ -1,4 +1,4 @@
-package cap4;
+package com.impacta.treinamento.cap4;
 
 public enum DiaDaSemana {
 
