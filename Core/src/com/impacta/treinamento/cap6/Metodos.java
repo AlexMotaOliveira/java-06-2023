@@ -50,6 +50,14 @@ public class Metodos extends Abstrata {
         return soma;
     }
 
+    public long somar(long ...array){
+        long valoresSomados = 0;
+        for (long elemento: array) {
+            valoresSomados+= elemento;
+        }
+        return valoresSomados;
+    }
+
     public long trocarValor(long valor1) {
         valor1 = 50;
         return valor1;
