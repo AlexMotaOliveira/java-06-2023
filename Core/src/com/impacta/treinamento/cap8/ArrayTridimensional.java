@@ -7,7 +7,7 @@ public class ArrayTridimensional {
 
         int notas[][][] = new int[2][2][2];
 
-//        int notas1[][][] = new int[][][]{{{5,9}},{{10,90}}};
+//        int notas1[][][] = new int[][][]{{{1, 2}, {1, 2}}, {{1, 2}, {1, 2}}};
 
         // [matricula][materia][bimestre] = nota
 
