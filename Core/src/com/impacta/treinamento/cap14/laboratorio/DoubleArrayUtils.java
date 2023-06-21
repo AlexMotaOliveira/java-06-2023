@@ -6,10 +6,10 @@ import java.util.function.DoubleUnaryOperator;
 
 public class DoubleArrayUtils {
 
-    public static double[] transformaValores(double[] valores, DoubleUnaryOperator funcao) {
+    public static double[] transformaValores(double[] valores, DoubleInterfaceRetornaDouble funcao) {
         double[] result = new double[valores.length];
         for (int i = 0; i < valores.length; i++) {
-            result[i] = funcao.applyAsDouble(valores[i]);
+            result[i] = funcao.converter(valores[i]);
         }
         return result;
     }
@@ -20,6 +20,7 @@ public class DoubleArrayUtils {
         int counter = 0;
 
         for (double val : valores) {
+            // salario >= 3000
             if (criterio.test(val)) {
                 temp[counter++] = val;
             }
