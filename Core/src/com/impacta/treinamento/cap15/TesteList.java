@@ -53,7 +53,17 @@ public class TesteList {
         paises.sort((x, y) -> x.compareTo(y));
         paises.sort(String::compareTo);
         paises.forEach(System.out::println);
-        paises.remove(2);
+        paises.remove("Brasil");
+        paises.removeIf( pais -> pais.equals("Inglaterra"));
+
+        for (String pais: paises) {
+            if(pais.equals("Inglaterra")){
+                paises.remove("Inglaterra");
+            }
+        }
+
+
+
 
 //        paises.clear();
 
