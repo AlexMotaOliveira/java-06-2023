@@ -69,6 +69,8 @@ public class TesteStreams {
                                         funcionario.getSalario() > 6000 ? "Atacante" : "Zagueiro",
                                         funcionario.getSalario()
                                 ));
+
+
 //        jogadorFutebolStream
 //                .sorted(Comparator.comparing(JogadorFutebol::getProfissao)
 //                        .reversed()

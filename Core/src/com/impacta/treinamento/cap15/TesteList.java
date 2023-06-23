@@ -81,6 +81,16 @@ public class TesteList {
         System.out.println("---- lista SET ------------");
         listSet.forEach(System.out::println);
 
+        Iterator<String> iterator = listSet.iterator();
+
+        listSet.stream().sorted();
+
+        System.out.println("---- lista Iterator ------------");
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+
         System.out.println("---- Streams ------------");
 //        Stream stream = paises
         paises
