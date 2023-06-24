@@ -10,9 +10,9 @@ public class ExemploCriacaoArquivoTryResouces {
         try (InputStream inputStream = new FileInputStream("Arquivo2.txt");
              DataInputStream stream = new DataInputStream(inputStream)) {
 
-            while (true){
+            while (stream.available() > 0){
                 char caracter = stream.readChar();
-                System.out.println(caracter);
+                System.out.print(caracter);
             }
 
         } catch (IOException e) {

@@ -8,9 +8,9 @@ public class ExemploCriacaoArquivo {
 
         try {
             String file = "Arquivo2.txt";
-            FileOutputStream arquivo = new FileOutputStream(file, true);
+            FileOutputStream arquivo = new FileOutputStream(file);
             DataOutputStream dados = new DataOutputStream(arquivo);
-            dados.writeBytes("meu segundo arquivo 3");
+            dados.writeChars("meu segundo arquivo 3");
 
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não criado");

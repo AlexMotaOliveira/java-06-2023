@@ -13,7 +13,7 @@ public class ExemplosPath {
         try {
 
             Path path = Paths.get("D:\\java-06-2023\\novo_Diretorio");
-            if (!Files.exists(path)) {
+            if (!Files.isDirectory(path)) {
                 Files.createDirectory(path);
             }
 
