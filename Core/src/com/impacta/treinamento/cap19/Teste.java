@@ -13,16 +13,16 @@ public class Teste {
     public static void main(String[] args) throws SQLException {
 
 
-        Connection connection = ConexaoFactory.conectar("pessoa");
-        Statement statement = connection.createStatement();
-
-        String query = "SELECT * FROM IMPACTA.teste;";
-        ResultSet resposta = statement.executeQuery(query);
-
-        while (resposta.next()) {
-            // 1
-            System.out.println(resposta.getString("NOME"));
-        }
+//        Connection connection = ConexaoFactory.conectar("pessoa");
+//        Statement statement = connection.createStatement();
+//
+//        String query = "SELECT * FROM IMPACTA.teste;";
+//        ResultSet resposta = statement.executeQuery(query);
+//
+//        while (resposta.next()) {
+//            // 1
+//            System.out.println(resposta.getString("NOME"));
+//        }
 
     }
 }

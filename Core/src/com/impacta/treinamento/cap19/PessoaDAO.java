@@ -10,102 +10,165 @@ import java.util.List;
 public class PessoaDAO {
 
     private static final String schema = "impacta";
-    private static final Connection connection = conectar();
-    private static final Statement statement = criarStatement();
 
-    public static void salvar(Pessoa pessoa) throws SQLException {
-        if (buscar(pessoa) == null) {
-            String query = "INSERT INTO pessoa (NOME, CPF, TELEFONE) VALUES (" +
-                    "'" + pessoa.getNome() + "'," +
-                    "'" + pessoa.getCpf() + "'," +
-                    "'" + pessoa.getTelefone() + "' );";
-            System.out.println(query);
+    public Pessoa save(Pessoa pessoa) throws SQLException {
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+
+            if (findByCpf(pessoa.getCpf()) == null) {
+                String query = "INSERT INTO pessoa (NOME, CPF, TELEFONE) VALUES (" +
+                        "'" + pessoa.getNome() + "'," +
+                        "'" + pessoa.getCpf() + "'," +
+                        "'" + pessoa.getTelefone() + "' );";
+                System.out.println(query);
+
+                int valor = statement.executeUpdate(query);
+                if (valor > 0) {
+//                connection.commit();
+                    System.out.println("salvo com sucesso!!!!");
+                    return findByCpf(pessoa.getCpf());
+                } else {
+                    System.out.println("não foi possivel salvar o objeto");
+                    connection.rollback();
+                }
+            } else {
+                System.out.println("Cpf já existe no banco");
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
+        }
+        return null;
+    }
+
+    public static Pessoa update(Pessoa pessoa) throws SQLException {
+
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+            String query = "UPDATE pessoa SET " +
+                    "`NOME` = '" + pessoa.getNome() + "', " +
+                    "`CPF` = '" + pessoa.getCpf() + "', " +
+                    "`TELEFONE` = '" + pessoa.getTelefone() + "' " +
+                    "WHERE (`ID` = '" + pessoa.getId() + "');";
+
             int valor = statement.executeUpdate(query);
             if (valor > 0) {
-                System.out.println("salvo com sucesso!!!!");
+                System.out.println("alterado com sucesso!!!!");
+                return findByCpf(pessoa.getCpf());
             } else {
-                System.out.println("não foi possivel salvar o objeto");
+                System.out.println("não foi possivel alterar o objeto: " + pessoa);
             }
-        } else {
-            System.out.println("Cpf já existe no banco");
+        } catch (SQLException s) {
+            System.out.println(s);
+        }
+        return null;
+    }
+
+    public static void deleteById(int id) throws SQLException {
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+            String query = "DELETE FROM pessoa WHERE (`ID` = " + id + ");";
+            int valor = statement.executeUpdate(query);
+            if (valor > 0) {
+                System.out.println("excluido com sucesso!!!!");
+            } else {
+                System.out.println("não foi possivel excluir o obejto com o id: " + id);
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
         }
     }
 
-    void alterar(Pessoa pessoa) {
-
-    }
-
-    void apagar(Pessoa pessoa) {
-
-    }
-
-    public static List<Pessoa> buscar() throws SQLException {
-        String query = "SELECT * FROM pessoa;";
-
-        ResultSet resultSet = statement.executeQuery(query);
-
+    public static List<Pessoa> findAll() throws SQLException {
         List<Pessoa> pessoas = new ArrayList<>();
-        while (resultSet.next()) {
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+            String query = "SELECT * FROM pessoa;";
 
-            int id = resultSet.getInt("ID");
-            String nome = resultSet.getString("NOME");
-            String cpf = resultSet.getString("CPF");
-            String telefone = resultSet.getString("TELEFONE");
+            ResultSet resultSet = statement.executeQuery(query);
 
-            Pessoa pessoaEntity = new Pessoa(id, nome, cpf, telefone);
-            pessoas.add(pessoaEntity);
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("ID");
+                String nome = resultSet.getString("NOME");
+                String cpf = resultSet.getString("CPF");
+                String telefone = resultSet.getString("TELEFONE");
+
+                Pessoa pessoaEntity = new Pessoa(id, nome, cpf, telefone);
+                pessoas.add(pessoaEntity);
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
         }
         return pessoas;
     }
 
-    public static Pessoa buscar(int primaryKey) throws SQLException {
-        String query = "SELECT * FROM pessoa WHERE id = " + primaryKey;
+    public static Pessoa findById(int primaryKey) throws SQLException {
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+            String query = "SELECT * FROM pessoa WHERE id = " + primaryKey;
 
-        ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
 
-        while (resultSet.next()) {
+            while (resultSet.next()) {
 
-            int id = resultSet.getInt("ID");
-            String nome = resultSet.getString("NOME");
-            String cpf = resultSet.getString("CPF");
-            String telefone = resultSet.getString("TELEFONE");
+                int id = resultSet.getInt("ID");
+                String nome = resultSet.getString("NOME");
+                String cpf = resultSet.getString("CPF");
+                String telefone = resultSet.getString("TELEFONE");
 
-            return new Pessoa(id, nome, cpf, telefone);
+                return new Pessoa(id, nome, cpf, telefone);
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
         }
         return null;
     }
 
-    public static Pessoa buscar(Pessoa pessoa) throws SQLException {
-        String query = "Select * FROM pessoa WHERE (`CPF` = '" + pessoa.getCpf() + "');";
+    public static Pessoa findByCpf(String cpf) throws SQLException {
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+            String query = "Select * FROM pessoa WHERE (`CPF` = '" + cpf + "');";
 
-        ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
 
-        while (resultSet.next()) {
+            while (resultSet.next()) {
 
-            int id = resultSet.getInt("ID");
-            String nome = resultSet.getString("NOME");
-            String cpf = resultSet.getString("CPF");
-            String telefone = resultSet.getString("TELEFONE");
+                int id = resultSet.getInt("ID");
+                String nome = resultSet.getString("NOME");
+                String cpf1 = resultSet.getString("CPF");
+                String telefone = resultSet.getString("TELEFONE");
 
-            return new Pessoa(id, nome, cpf, telefone);
+                return new Pessoa(id, nome, cpf1, telefone);
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
         }
+        System.out.println("não foi encontrada uma pessoa com o cpf: " + cpf);
         return null;
     }
 
-    private static Connection conectar() {
-        try {
-            return ConexaoFactory.conectar(schema);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public List<Pessoa> findByNome(String nome) throws SQLException {
+        try (Connection connection = new ConexaoFactory().conectar(schema);
+             Statement statement = connection.createStatement()) {
+            String query = "Select * FROM pessoa WHERE `NOME` like '%" + nome + "%';";
 
-    private static Statement criarStatement() {
-        try {
-            return connection.createStatement();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+            ResultSet resultSet = statement.executeQuery(query);
 
+            List<Pessoa> pessoas = new ArrayList<>();
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("ID");
+                String nome1 = resultSet.getString("NOME");
+                String cpf1 = resultSet.getString("CPF");
+                String telefone = resultSet.getString("TELEFONE");
+
+                Pessoa pessoa = new Pessoa(id, nome1, cpf1, telefone);
+                pessoas.add(pessoa);
+            }
+        } catch (SQLException s) {
+            System.out.println(s);
+        }
+        System.out.println("não foi encontrada uma pessoa com o nome: " + nome);
+        return null;
+    }
 }
