@@ -13,9 +13,10 @@ public class ConexaoFactory {
     public Connection conectar(String schema) {
         String url = urlBd + schema;
         try {
-            Connection con = DriverManager.getConnection(url, user, senha);
+            Connection connection = DriverManager.getConnection(url, user, senha);
             System.out.println("conexão realizado com sucesso!!!!!");
-            return con;
+//            connection.setAutoCommit(false);
+            return connection;
         } catch (SQLException s) {
             throw new RuntimeException("falha ao conectar com o banco: " + s);
         }
