@@ -7,6 +7,7 @@ import repository.FilmeDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class FilmeDAOImpl implements FilmeDAO {
 
@@ -91,6 +92,30 @@ public class FilmeDAOImpl implements FilmeDAO {
         return filmes;
     }
 
+    @Override
+    public Filme sortedFilme(String genero, double nota, int numeroVotos) {
+
+        String query = "SELECT * FROM filme where generos like ? and nota >= ? and numeroVotos >= ? ;";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, "%" + genero + "%");
+            preparedStatement.setDouble(2, nota);
+            preparedStatement.setInt(3, numeroVotos);
+
+            List<Filme> filmes = getResultSet(preparedStatement);
+
+            if (!filmes.isEmpty()) {
+                Random random = new Random();
+                int numeroSorteado = random.nextInt(filmes.size());
+                return filmes.get(numeroSorteado);
+            }
+        } catch (SQLException s) {
+            s.printStackTrace();
+        }
+        return null;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(urlBd, user, senha);
     }
@@ -101,6 +126,7 @@ public class FilmeDAOImpl implements FilmeDAO {
 
             while (resultSet.next()) {
                 Filme filme = new Filme();
+                filme.setId(resultSet.getInt("id"));
                 filme.setTitulo(resultSet.getString("titulo"));
                 filme.setDiretores(resultSet.getString("diretores"));
                 filme.setNota(resultSet.getDouble("nota"));

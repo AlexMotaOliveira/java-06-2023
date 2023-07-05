@@ -17,4 +17,6 @@ public interface FilmeDAO {
     Filme findById(long id);
 
     List<Filme> findByTituloAndGeneroAndAno(String titulo, String genero, int ano);
+
+    Filme sortedFilme(String genero, double nota, int numeroVotos);
 }

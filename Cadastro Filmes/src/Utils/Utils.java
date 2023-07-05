@@ -27,4 +27,27 @@ public class Utils {
             }
         }
     }
+    public static int getInt(String texto) {
+        int valor = 0;
+        if (!texto.isEmpty()) {
+            try {
+                valor = Integer.parseInt(texto);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return valor;
+    }
+
+    public static double getDouble(String texto) {
+        double valor = 0;
+        if (!texto.isEmpty()) {
+            try {
+                valor = Double.parseDouble(texto);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return valor;
+    }
 }

@@ -1,3 +1,4 @@
+import Utils.Utils;
 import model.Filme;
 import service.FilmeDAOImpl;
 
@@ -22,11 +23,46 @@ public class ApplicationUserFilme {
             case 1:
                 consultar();
             case 2:
+                boolean isTrue = true;
+                while (isTrue) {
+                    isTrue = sortear();
+                }
                 break;
             case 3:
             default:
                 System.out.println("fim do programa");
         }
+    }
+
+    private static boolean sortear() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite as informações para o sorteio do Filme:");
+        System.out.print("Genero: ");
+        String genero = scanner.nextLine();
+
+        System.out.print("Nota do filme: ");
+        String notaTexto = scanner.nextLine();
+
+        System.out.print("Numero minimo de votos: ");
+        String numeroVotosTexto = scanner.nextLine();
+
+        double nota = Utils.getDouble(notaTexto);
+        int numeroVotos = Utils.getInt(numeroVotosTexto);
+
+        FilmeDAOImpl dao = new FilmeDAOImpl();
+        Filme filme = dao.sortedFilme(genero, nota, numeroVotos);
+
+        if (filme == null) {
+            System.out.println("Nenhum Filme Encontrado");
+        } else {
+            filme.imprimir();
+            System.out.println();
+        }
+
+        System.out.println("Deseja escolher outro filme: S ou N");
+        String resposta = scanner.nextLine();
+        return !resposta.isEmpty() && resposta.equalsIgnoreCase("s");
     }
 
     private static void consultar() {
@@ -42,14 +78,7 @@ public class ApplicationUserFilme {
         System.out.print("ano: ");
         String anoTexto = scanner.nextLine();
 
-        int ano = 0;
-        if (!anoTexto.isEmpty()) {
-            try {
-                ano = Integer.parseInt(anoTexto);
-            } catch (RuntimeException e) {
-                System.out.println("erro ao consultar a lista de filmes");
-            }
-        }
+        int ano = Utils.getInt(anoTexto);
 
         FilmeDAOImpl filmeDAO = new FilmeDAOImpl();
         List<Filme> filmes = filmeDAO.findByTituloAndGeneroAndAno(titulo, genero, ano);
