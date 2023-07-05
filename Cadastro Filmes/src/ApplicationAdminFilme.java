@@ -1,9 +1,10 @@
+import Utils.Utils;
 import model.Filme;
 import service.FilmeDAOImpl;
 
 import java.util.Scanner;
 
-public class ApplicationFilme {
+public class ApplicationAdminFilme {
     public static void main(String[] args) {
 
 
@@ -13,6 +14,7 @@ public class ApplicationFilme {
 
         System.out.println("02- Consultar");
         System.out.println("03- Cadastrar");
+        System.out.println("04- Sair");
 
         int valor = scanner.nextInt();
 
@@ -24,6 +26,9 @@ public class ApplicationFilme {
             case 3:
                 saveFilme(scanner);
                 break;
+            case 4:
+            default:
+                System.out.println("fim do programa");
         }
     }
 
@@ -46,42 +51,19 @@ public class ApplicationFilme {
         filme.setGeneros(scanner.nextLine());
 
         System.out.print("nota [0 a 10]: ");
-        filme.setNota(getDouble());
+        filme.setNota(Utils.getDouble());
 
         System.out.print("ano (>=0): ");
-        filme.setAno(getInt());
+        filme.setAno(Utils.getInt());
 
         System.out.print("numero de votos (>=0): ");
-        filme.setNumeroVotos(getInt());
+        filme.setNumeroVotos(Utils.getInt());
 
         System.out.print("duracao em minutos (>=0): ");
-        filme.setDuracao(getInt());
+        filme.setDuracao(Utils.getInt());
 
         FilmeDAOImpl filmeDAO = new FilmeDAOImpl();
         filmeDAO.save(filme);
     }
 
-    private static double getDouble() {
-
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                return scanner.nextDouble();
-
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static int getInt() {
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(System.in);
-                return scanner.nextInt();
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

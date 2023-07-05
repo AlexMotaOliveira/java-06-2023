@@ -38,7 +38,8 @@ Dados que podem ser inseridos no filtro:
 gênero, anoInicial, anoFinal, titulo parcial 
 
 Caso o anoInicial não seja informado, deve ser considerado igual 0 que representa sem limite inferior quanto ao ano
-Caso o anoFinal não seja informado, deve ser considerado igual 0 que representa sem limite superior quanto ao ano, porém, se for maior que 0 deve ser maior que o ano inicial informado
+Caso o anoFinal não seja informado, deve ser considerado igual 0 que representa sem limite superior quanto ao ano,
+porém, se for maior que 0 deve ser maior que o ano inicial informado
 
 
 -----

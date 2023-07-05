@@ -1,6 +1,8 @@
 package model;
 
-public class Filme {
+import java.util.Objects;
+
+public class Filme implements Comparable {
 
     private long id;
     private String titulo;
@@ -113,5 +115,36 @@ public class Filme {
                 ", numeroVotos=" + numeroVotos +
                 ", url='" + url + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Filme)) return false;
+        Filme filme = (Filme) o;
+        return getId() == filme.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Filme filme = (Filme) o;
+        return titulo.compareTo(filme.getTitulo());
+    }
+
+    public void imprimir() {
+        System.out.println(
+                "\nTitulo='" + titulo +
+                        "\nDiretores=" + diretores +
+                        "\nnota=" + nota +
+                        "\nduracao=" + duracao +
+                        "\nano=" + ano +
+                        "\nGeneros=" + generos +
+                        "\nnumeroVotos=" + numeroVotos +
+                        "\nurl=" + url);
     }
 }
