@@ -88,7 +88,6 @@ public class ApplicationUserFilme {
             return;
         }
 
-        // TODO: 04/07/2023 ainda falta imprimir os dados conforme o requisito
 //        filmes.stream().sorted().forEach(System.out::println);
         filmes.forEach(Filme::imprimir);
 

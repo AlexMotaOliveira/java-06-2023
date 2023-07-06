@@ -48,6 +48,17 @@ public class FilmeDAOImpl implements FilmeDAO {
     @Override
     public void delete(long id) {
 
+        String query = "DELETE FROM filme where id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException s) {
+            String message = "falha ao excluir o id: " + id;
+            throw new FileException(message, s);
+        }
     }
 
     @Override
@@ -138,6 +149,27 @@ public class FilmeDAOImpl implements FilmeDAO {
 
                 filmes.add(filme);
             }
+        }
+        return filmes;
+    }
+
+    @Override
+    public List<Filme> findByGeneroAndTituloAndAnoBetweenAno(String genero, String titulo, int anoInicial, int anoFinal) {
+        List<Filme> filmes = new ArrayList<>();
+        String query = "SELECT * FROM filme where generos like ? and titulo like ? and ano between ? and ? order by titulo;";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, "%" + genero + "%");
+            preparedStatement.setString(2, "%" + titulo + "%");
+            preparedStatement.setInt(3, anoInicial);
+            preparedStatement.setInt(4, anoFinal);
+
+            return getResultSet(preparedStatement);
+
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
         return filmes;
     }

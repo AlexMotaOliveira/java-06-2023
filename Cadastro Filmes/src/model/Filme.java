@@ -145,6 +145,7 @@ public class Filme implements Comparable {
                         "\nano=" + ano +
                         "\nGeneros=" + generos +
                         "\nnumeroVotos=" + numeroVotos +
-                        "\nurl=" + url);
+                        "\nurl=" + url +
+                        "\nid=" + id);
     }
 }
