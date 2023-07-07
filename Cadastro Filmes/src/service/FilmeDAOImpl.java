@@ -14,6 +14,15 @@ public class FilmeDAOImpl implements FilmeDAO {
     private final static String urlBd = "jdbc:mysql://localhost:3306/impacta";
     private final static String user = "root";
     private final static String senha = "123456";
+    private boolean autoCommit;  // padrão false
+
+    public   FilmeDAOImpl(boolean autoCommit){
+        this.autoCommit = autoCommit;
+    }
+
+    public FilmeDAOImpl(){
+
+    }
 
     @Override
     public Filme save(Filme filme) {
@@ -127,9 +136,6 @@ public class FilmeDAOImpl implements FilmeDAO {
         return null;
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(urlBd, user, senha);
-    }
 
     private List<Filme> getResultSet(PreparedStatement statement) throws SQLException {
         List<Filme> filmes = new ArrayList<>();
@@ -172,5 +178,12 @@ public class FilmeDAOImpl implements FilmeDAO {
             s.printStackTrace();
         }
         return filmes;
+    }
+    private Connection getConnection() throws SQLException {
+        Connection connection = DriverManager.getConnection(urlBd, user, senha);
+        if (this.autoCommit){
+            connection.setAutoCommit(false);
+        }
+        return connection;
     }
 }

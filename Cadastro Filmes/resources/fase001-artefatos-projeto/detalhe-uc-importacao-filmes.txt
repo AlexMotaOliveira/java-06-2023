@@ -22,3 +22,5 @@ O arquivo deve ter o formato CSV com o separador sendo o caracter "ponto e vírgu
 RN2: Erro de conversão, processamento, 
 
 Os erros de conversão e relacionados devem ser ignorados no processamento, passando para a próxima linha do arquivo.
+
+

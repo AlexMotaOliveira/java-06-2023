@@ -21,7 +21,7 @@ public class FilmeDaoImplTest {
 
     @BeforeEach
     void setUp() {
-        filmeDAO = new FilmeDAOImpl();
+        filmeDAO = new FilmeDAOImpl(true);
     }
 
 //    @AfterAll
@@ -44,11 +44,9 @@ public class FilmeDaoImplTest {
 
     @Test
     void validaSeInsereUmFilme() {
-
-        Filme filme = new Filme("Teste", "Alex Teste", 10, 400, 2023,
+        Filme filme = new Filme("AutoCommmit", "Alex Teste", 10, 400, 2023,
                 "terror", 15, "meusite.com");
         Filme filmeEntity = filmeDAO.save(filme);
-
         Assertions.assertNotNull(filmeEntity, "filme esta nulo");
     }
 

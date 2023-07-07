@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Cadastro Filmes/Cadastro Filmes.iml" filepath="$PROJECT_DIR$/Cadastro Filmes/Cadastro Filmes.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/estacionamento/Estacionamento.iml" filepath="$PROJECT_DIR$/estacionamento/Estacionamento.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-06-2023.iml" filepath="$PROJECT_DIR$/java-06-2023.iml" />
     </modules>
   </component>
