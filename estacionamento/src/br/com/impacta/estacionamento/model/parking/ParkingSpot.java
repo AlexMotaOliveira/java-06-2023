@@ -12,4 +12,13 @@ public abstract class ParkingSpot {
     public void setFree(boolean free) {
         isFree = free;
     }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

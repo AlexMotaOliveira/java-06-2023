@@ -1,6 +1,13 @@
 package br.com.impacta.estacionamento.account;
 
+import br.com.impacta.estacionamento.model.parking.Entrance;
+import br.com.impacta.estacionamento.model.parking.Exit;
+import br.com.impacta.estacionamento.model.parking.ParkingSpot;
+import br.com.impacta.estacionamento.panel.DisplayBoard;
+
 public class Admin extends Account {
+
+
 
 
     @Override
@@ -8,19 +15,19 @@ public class Admin extends Account {
         return false;
     }
 
-    public boolean addParkingSpot(int floorName, int spot) {
+    public boolean addParkingSpot(ParkingSpot spot) {
         return true;
     }
 
-    public boolean addDisplayBoard(int floorName, int displayBoard) {
+    public boolean addDisplayBoard(DisplayBoard displayBoard) {
         return true;
     }
 
-    public boolean addEntrance(String entrance){
+    public boolean addEntrance(Entrance entrance){
         return true;
     }
 
-    public boolean exit(String exit){
+    public boolean exit(Exit exit){
         return true;
     }
 }
